@@ -17,6 +17,7 @@ async function run() {
     try {
         await client.connect();
         const productCollection = client.db('wearHouse2').collection('product')
+        const orderCollection = client.db('ClothingWarehouse').collection('orders');
 
         //get users
         app.get('/product', async (req, res) => {
@@ -41,6 +42,14 @@ async function run() {
             const result = await productCollection.insertOne(newProduct)
             res.send(result)
         })
+
+        // order item
+        app.post('/order', async (req, res) => {
+            const order = req.body;
+            const result = await orderCollection.insertOne(order);
+            res.send(result);
+        })
+
 
         // update user
         app.put('/inventory/:id', async (req, res) => {
