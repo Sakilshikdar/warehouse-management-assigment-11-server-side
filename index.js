@@ -43,7 +43,7 @@ async function run() {
             res.send(result)
         })
 
-        // order item
+        // order item 
         app.post('/order', async (req, res) => {
             const order = req.body;
             const result = await orderCollection.insertOne(order);
@@ -51,7 +51,7 @@ async function run() {
         })
 
 
-        // update user
+        // update one user 
         app.put('/inventory/:id', async (req, res) => {
             const id = (req.params.id);
             const updatedNum = req.body;
