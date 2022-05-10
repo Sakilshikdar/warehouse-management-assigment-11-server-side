@@ -39,9 +39,13 @@ async function run() {
         //post 
         app.post('/product', async (req, res) => {
             const newProduct = req.body;
+            if(!product.name || !product.price || !product.image){
+                return res.send({success: false, error: "Please provide all information"});
+              }
+              
             const result = await productCollection.insertOne(newProduct)
-            res.send(result)
-        })
+              res.send(result, {success: true, message: `Successfully inserted ${product.name}!`});
+            })
 
         // order item 
         app.post('/order', async (req, res) => {
