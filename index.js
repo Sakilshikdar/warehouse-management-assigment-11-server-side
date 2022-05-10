@@ -37,7 +37,7 @@ async function run() {
         });
 
         //post 
-        app.post('/product', async(req, res)=>{
+        app.post('/product', async (req, res) => {
             const newProduct = req.body;
             const result = await productCollection.insertOne(newProduct)
             res.send(result)
@@ -68,9 +68,9 @@ async function run() {
         });
 
         //delete item
-        app.delete('/items/:id', async(req, res) =>{
+        app.delete('/items/:id', async (req, res) => {
             const id = req.params.id;
-            const query = {_id: ObjectId(id)};
+            const query = { _id: ObjectId(id) };
             const result = await productCollection.deleteOne(query);
             res.send(result);
         })
@@ -80,6 +80,10 @@ async function run() {
     }
 }
 run().catch(console.dir);
+
+app.get('/', (req, res) => {
+    res.send('server is running')
+})
 
 app.listen(port, () => {
     console.log('Listening to port', port)
